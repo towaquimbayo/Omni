@@ -24,8 +24,8 @@ export default function Layout({
         <meta charSet="utf-8" />
         <title>{isLandingPage ? "Omni" : `${title} | Omni`}</title>
       </Helmet>
+      <div className="min-h-screen max-w-7xl mx-auto px-16">{children}</div>
       {showNav && <Navbar />}
-      <div className="min-h-screen">{children}</div>
     </>
   );
 }
