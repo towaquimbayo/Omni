@@ -2,28 +2,69 @@ import Layout from "../components/Layout";
 import { Plus, Zap, Play, Trash } from "lucide-react";
 import { useState } from "react";
 
-// Temporary mock data
-const automations = [
+// Types
+interface Action {
+  id: string;
+  type: string;
+}
+
+interface Automation {
+  id: number;
+  name: string;
+  trigger: string;
+  actions: Action[];
+  enabled: boolean;
+}
+
+// Mock Data
+const TRIGGER_OPTIONS = [
+  "Every day at 7:00 AM",
+  "When someone arrives home",
+  "Every day at 10:00 PM",
+  "When everyone leaves home",
+];
+
+const ACTION_OPTIONS = [
+  "Turn on lights",
+  "Turn off lights",
+  "Adjust thermostat",
+  "Lock doors",
+  "Unlock doors",
+  "Send notification",
+  "Play music",
+  "Play welcome message",
+];
+
+const automations: Automation[] = [
   {
     id: 1,
-    name: "Daily Report",
-    trigger: "Every day at 9:00 AM",
-    actions: 3,
+    name: "Morning Routine",
+    trigger: "Every day at 7:00 AM",
+    actions: [
+      { id: "1", type: "Turn on lights" },
+    ],
     enabled: true,
   },
   {
     id: 2,
-    name: "New Lead Follow-up",
-    trigger: "When new lead is created",
-    actions: 2,
-    enabled: false,
+    name: "Welcome Home",
+    trigger: "When someone arrives home",
+    actions: [
+      { id: "1", type: "Turn on lights" },
+      { id: "2", type: "Unlock doors" },
+      { id: "3", type: "Play welcome message" },
+    ],
+    enabled: true,
   },
   {
     id: 3,
-    name: "Feedback Request",
-    trigger: "After 1 week of purchase",
-    actions: 1,
-    enabled: true,
+    name: "Good Night",
+    trigger: "Every day at 10:00 PM",
+    actions: [
+      { id: "1", type: "Turn off lights" },
+      { id: "3", type: "Adjust thermostat" },
+    ],
+    enabled: false,
   },
 ];
 
@@ -32,7 +73,7 @@ export default function Automations() {
     new Set(automations.filter(a => a.enabled).map(a => a.id))
   );
   const [expandedAutomation, setExpandedAutomation] = useState<number | null>(null);
-  const [newActions, setNewActions] = useState<string[]>([""]);
+  const [newActions, setNewActions] = useState<Action[]>([{ id: "new", type: "" }]);
   const [automationList, setAutomationList] = useState(automations);
 
   const toggleAutomation = (id: number) => {
@@ -54,13 +95,13 @@ export default function Automations() {
   const handleActionChange = (index: number, value: string) => {
     setNewActions(prev => {
       const updated = [...prev];
-      updated[index] = value;
+      updated[index].type = value;
       return updated;
     });
   };
 
   const addAction = () => {
-    setNewActions(prev => [...prev, ""]);
+    setNewActions(prev => [...prev, { id: `new-${prev.length + 1}`, type: "" }]);
   };
 
   const removeAction = (index: number) => {
@@ -73,16 +114,54 @@ export default function Automations() {
       id: automationList.length + 1,
       name: "New Automation",
       trigger: "Every day at 9:00 AM",
-      actions: newActions.length,
+      actions: newActions,
       enabled: true,
     };
     setAutomationList([newAutomation, ...automationList]);
     setExpandedAutomation(null);
-    setNewActions([""]);
+    setNewActions([{ id: "new", type: "" }]);
   };
 
   const handleDeleteAutomation = (id: number) => {
     setAutomationList(prev => prev.filter(automation => automation.id !== id));
+  };
+
+  const handleActionEdit = (automationId: number, index: number, value: string) => {
+    setAutomationList(prev => {
+      const updated = prev.map(automation => {
+        if (automation.id === automationId) {
+          const updatedActions = [...automation.actions];
+          updatedActions[index].type = value;
+          return { ...automation, actions: updatedActions };
+        }
+        return automation;
+      });
+      return updated;
+    });
+  };
+
+  const handleActionAdd = (automationId: number) => {
+    setAutomationList(prev => {
+      const updated = prev.map(automation => {
+        if (automation.id === automationId) {
+          return { ...automation, actions: [...automation.actions, { id: `new-${automation.actions.length + 1}`, type: "" }] };
+        }
+        return automation;
+      });
+      return updated;
+    });
+  };
+
+  const handleActionRemove = (automationId: number, index: number) => {
+    setAutomationList(prev => {
+      const updated = prev.map(automation => {
+        if (automation.id === automationId) {
+          return { ...automation, actions: automation.actions.filter((_, i) => i !== index) };
+        }
+        return automation;
+      });
+      return updated;
+    });
   };
 
   return (
@@ -90,7 +169,7 @@ export default function Automations() {
       {/* Header Section */}
       <div className="flex justify-between items-center py-8">
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 bg-primary/30 transform rotate-45 mx-auto"></div>
+          <div className="w-2 h-2 bg-[#c4dbf3] transform rotate-45 mx-auto"></div>
           <h1 className="text-3xl font-semibold">My Automations</h1>
         </div>
         
@@ -104,7 +183,7 @@ export default function Automations() {
       </div>
 
       {/* Automations List */}
-      <div className="space-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {expandedAutomation === -1 && (
           <div className="border border-gray-200 rounded-3xl">
             <div className="p-6">
@@ -132,18 +211,17 @@ export default function Automations() {
                       hover:border-primary/50
                       focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                   >
-                    <option>Every day at 9:00 AM</option>
-                    <option>When new lead is created</option>
-                    <option>After 1 week of purchase</option>
-                    <option>After 1 hour of abandonment</option>
+                    {TRIGGER_OPTIONS.map(option => (
+                      <option key={option} value={option}>{option}</option>
+                    ))}
                   </select>
                 </div>
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700">Actions</label>
                   {newActions.map((action, index) => (
-                    <div key={index} className="flex items-center mb-2">
+                    <div key={action.id} className="flex items-center mb-2">
                       <select
-                        value={action}
+                        value={action.type}
                         onChange={(e) => handleActionChange(index, e.target.value)}
                         className="mt-1 block w-full px-4 py-2.5
                           bg-white border border-gray-300 
@@ -155,9 +233,9 @@ export default function Automations() {
                           focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                       >
                         <option value="">Select action</option>
-                        <option>Send Email</option>
-                        <option>Create Task</option>
-                        <option>Send Notification</option>
+                        {ACTION_OPTIONS.map(option => (
+                          <option key={option} value={option}>{option}</option>
+                        ))}
                       </select>
                       <button
                         type="button"
@@ -199,7 +277,7 @@ export default function Automations() {
                 </div>
                 <div className="flex items-center text-sm text-gray-500 mt-1">
                   <Play className="w-4 h-4 mr-1" />
-                  {automation.actions} Actions
+                  {automation.actions.length} Actions
                 </div>
                 <div className="flex space-x-2 pt-4">
                   <button onClick={() => toggleExpand(automation.id)} className="text-sm text-primary hover:text-primary/80">
@@ -240,19 +318,18 @@ export default function Automations() {
                         hover:border-primary/50
                         focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                     >
-                      <option>Every day at 9:00 AM</option>
-                      <option>When new lead is created</option>
-                      <option>After 1 week of purchase</option>
-                      <option>After 1 hour of abandonment</option>
+                      {TRIGGER_OPTIONS.map(option => (
+                        <option key={option} value={option}>{option}</option>
+                      ))}
                     </select>
                   </div>
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700">Actions</label>
-                    {newActions.map((action, index) => (
-                      <div key={index} className="flex items-center mb-2">
+                    {automation.actions.map((action, index) => (
+                      <div key={action.id} className="flex items-center mb-2">
                         <select
-                          value={action}
-                          onChange={(e) => handleActionChange(index, e.target.value)}
+                          value={action.type}
+                          onChange={(e) => handleActionEdit(automation.id, index, e.target.value)}
                           className="mt-1 block w-full px-4 py-2.5
                             bg-white border border-gray-300 
                             rounded-xl shadow-sm
@@ -263,13 +340,13 @@ export default function Automations() {
                             focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                         >
                           <option value="">Select action</option>
-                          <option>Send Email</option>
-                          <option>Create Task</option>
-                          <option>Send Notification</option>
+                          {ACTION_OPTIONS.map(option => (
+                            <option key={option} value={option}>{option}</option>
+                          ))}
                         </select>
                         <button
                           type="button"
-                          onClick={() => removeAction(index)}
+                          onClick={() => handleActionRemove(automation.id, index)}
                           className="ml-2 text-red-600 hover:text-red-700"
                         >
                           <Trash className="w-5 h-5" />
@@ -278,7 +355,7 @@ export default function Automations() {
                     ))}
                     <button
                       type="button"
-                      onClick={addAction}
+                      onClick={() => handleActionAdd(automation.id)}
                       className="mt-2 px-1 py-2 flex text-sm text-primary rounded-lg"
                     >
                       <Plus className="w-5 h-5 mr-2" />

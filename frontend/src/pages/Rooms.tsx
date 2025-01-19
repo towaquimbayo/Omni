@@ -1,5 +1,16 @@
 import { useState } from "react";
-import { FastForward, LayoutGrid, Leaf, Pause, Radio, Repeat, Rewind, Snowflake, SunDim, Wind } from "lucide-react";
+import {
+  FastForward,
+  LayoutGrid,
+  Leaf,
+  Pause,
+  Radio,
+  Repeat,
+  Rewind,
+  Snowflake,
+  SunDim,
+  Wind,
+} from "lucide-react";
 import { LiveAudioVisualizer } from "react-audio-visualize";
 import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 import CircularSlider from "react-circular-slider-svg";
@@ -149,7 +160,7 @@ export default function Rooms() {
                 } flex items-center gap-2 transition-all duration-100 ease-in-out`}
               >
                 {room.id === selectedRoom.id && (
-                  <div className="w-2 h-2 bg-primary/30 transform rotate-45 mx-auto"></div>
+                  <div className="w-2 h-2 bg-[#c4dbf3] transform rotate-45 mx-auto"></div>
                 )}
                 {room.name}
               </button>
@@ -221,10 +232,10 @@ export default function Rooms() {
                   }}
                 >
                   <div
-                    className="w-5 h-5 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
+                    className="w-4 h-4 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
                     style={{
                       transform: devices[0].isConnected
-                        ? "translateX(60%)"
+                        ? "translateX(100%)"
                         : "translateX(0)",
                     }}
                   ></div>
@@ -259,10 +270,10 @@ export default function Rooms() {
                   }}
                 >
                   <div
-                    className="w-5 h-5 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
+                    className="w-4 h-4 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
                     style={{
                       transform: devices[1].isConnected
-                        ? "translateX(60%)"
+                        ? "translateX(100%)"
                         : "translateX(0)",
                     }}
                   ></div>
@@ -297,10 +308,10 @@ export default function Rooms() {
                   }}
                 >
                   <div
-                    className="w-5 h-5 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
+                    className="w-4 h-4 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
                     style={{
                       transform: devices[2].isConnected
-                        ? "translateX(60%)"
+                        ? "translateX(100%)"
                         : "translateX(0)",
                     }}
                   ></div>
@@ -335,10 +346,10 @@ export default function Rooms() {
                   }}
                 >
                   <div
-                    className="w-5 h-5 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
+                    className="w-4 h-4 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
                     style={{
                       transform: devices[3].isConnected
-                        ? "translateX(60%)"
+                        ? "translateX(100%)"
                         : "translateX(0)",
                     }}
                   ></div>
@@ -365,6 +376,7 @@ export default function Rooms() {
             ))} */}
           </div>
         </div>
+
         <div className="w-1/4 mx-auto p-8 bg-thermostat-gradient h-full rounded-3xl flex flex-col">
           <h1 className="text-4xl text-center font-light text-white mb-4">
             {currentTime.split(" ")[0]}{" "}
@@ -383,7 +395,7 @@ export default function Rooms() {
               <div
                 className="w-5 h-5 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
                 style={{
-                  transform: thermostat ? "translateX(95%)" : "translateX(0)",
+                  transform: thermostat ? "translateX(100%)" : "translateX(0)",
                 }}
               ></div>
             </div>
@@ -391,7 +403,7 @@ export default function Rooms() {
 
           <div className="flex flex-col items-center justify-center w-full">
             <CircularSlider
-              minValue={-20} 
+              minValue={-20}
               maxValue={40}
               size={350}
               trackWidth={12}
