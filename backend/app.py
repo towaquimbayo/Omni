@@ -5,8 +5,11 @@ from flask import Flask, request, jsonify, Response
 from config import Config
 from voice.detector import WakeWordDetector
 from voice.voice_to_text import LeopardTranscriber
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app, origins='*')
 config = Config()
 wake_detector = WakeWordDetector(config)
 transcriber = LeopardTranscriber(config)
@@ -16,7 +19,9 @@ import json
 @app.before_request
 def before_request():
     if request.method == 'OPTIONS':
-        return 200
+        return '', 200  # You need to return an empty response body for OPTIONS
+
+
 def send_to_conversation_api(command: str, language: str = "en"):
     url = f'{config.HOME_ASSISTANT_URL}/api/conversation/process'
     headers = {
@@ -70,7 +75,6 @@ def proxy(path):
     # Construct the full URL to the target server
 
     target_url = f'{config.HOME_ASSISTANT_URL}/api/{path}'
-
     # Get the incoming request's data (if any)
     request_data = request.get_data()
 
@@ -84,9 +88,8 @@ def proxy(path):
         resp = requests.post(target_url, headers=headers, data=request_data)
     elif request.method == 'PUT':
         resp = requests.put(target_url, headers=headers, data=request_data)
-
     # Return the response from the target server to the client
-    return Response(resp.content, status=resp.status_code, headers=dict(resp.headers))
+    return resp.content, resp.status_code
 
 @app.route('/voice/transcribe', methods=['POST'])
 def transcribe_command():
