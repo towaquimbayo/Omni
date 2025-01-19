@@ -5,9 +5,12 @@ export default {
     extend: {
       fontFamily: { Inter: ["Inter", "sans-serif"] },
       colors: {
-        primary: '#243B5A',
-        secondary: '#EAF4FE',
-      }
+        primary: "#243B5A",
+        secondary: "#EAF4FE",
+      },
+      backgroundImage: {
+        "thermostat-gradient": "radial-gradient(circle, #1e2746, #0e122b)",
+      },
     },
   },
   plugins: [],
