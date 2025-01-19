@@ -13,7 +13,7 @@ export default function Login() {
   return (
     <Layout title="Login">
       <div 
-        className="min-h-screen flex bg-primary"
+        className="min-h-screen flex flex-col md:flex-row justify-center md:justify-normal bg-primary"
         style={{
           backgroundImage: `
             linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
@@ -23,7 +23,7 @@ export default function Login() {
         }}
       >
         {/* Left Half - Blue Background */}
-        <div className="w-1/2 relative flex flex-col">
+        <div className="hidden md:flex w-full md:w-1/2 relative flex-col">
           {/* Logo */}
           <div className="absolute top-8 left-8">
             <img src="../assets/primary_logo_light.svg" alt="Omni" className="h-8 w-auto" />
@@ -31,10 +31,10 @@ export default function Login() {
 
           {/* Centered Content */}
           <div className="flex-1 flex flex-col justify-center px-8">
-            <h2 className="text-5xl font-bold text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Intelligent Home Automation That Anticipates Your Needs
             </h2>
-            <p className="text-xl text-white/80">
+            <p className="text-lg md:text-xl text-white/80">
               Experience the perfect harmony of comfort and technology, where every room responds to your desires.
             </p>
           </div>
@@ -61,7 +61,7 @@ export default function Login() {
         </div>
 
         {/* Right Half - Login Form */}
-        <div className="w-1/2 flex items-center justify-center m-4 rounded-3xl bg-white">
+        <div className="w-full md:w-1/2 flex items-center justify-center m-0 md:m-4 rounded-3xl bg-white">
           <div className="max-w-md w-full space-y-8 p-8">
             <div>
               <h1 className="text-2xl font-semibold text-center text-gray-900">Login</h1>
