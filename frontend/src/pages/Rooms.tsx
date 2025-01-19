@@ -379,7 +379,7 @@ export default function Rooms() {
           </div>
         </div>
 
-        <div className="w-full mx-auto p-8 bg-thermostat-gradient h-full rounded-3xl flex flex-col mb-16 min-[1400px]:w-1/4 xl:w-1/3 md:w-1/2 lg:mb-0">
+        <div className="w-full mx-auto p-4 bg-thermostat-gradient h-full rounded-3xl flex flex-col mb-16 min-[1400px]:w-1/4 xl:w-1/3 md:w-1/2 lg:mb-0 sm:p-8">
           <h1 className="text-3xl text-center font-light text-white mb-2">
             {currentTime.split(" ")[0]}{" "}
             <span className="text-gray-400">{currentTime.split(" ")[1]}</span>

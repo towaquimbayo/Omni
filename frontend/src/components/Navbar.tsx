@@ -13,11 +13,11 @@ export default function Navbar() {
 
   return (
     <nav className="sticky bottom-6 max-w-[1800px] mx-auto px-4 md:px-8">
-      <div className="w-full bg-[#f8f8f8]/70 backdrop-blur-sm shadow-sm rounded-full flex justify-between items-center p-2">
+      <div className="w-full bg-[#f8f8f8]/70 backdrop-blur-sm shadow-sm rounded-full flex justify-center items-center p-2 sm:justify-between">
         <img
           src="../assets/primary_logo_dark.svg"
           alt="Omni"
-          className="h-4 md:h-6 pl-6 w-auto cursor-pointer"
+          className="hidden h-4 md:h-6 pl-6 w-auto cursor-pointer sm:block"
           onClick={() => navigate("/")}
         />
         <div className="flex gap-4 md:gap-12">
@@ -34,7 +34,7 @@ export default function Navbar() {
             Logout
           </Link>
         </div>
-        <div className="flex justify-between items-center gap-2 p-2 md:pr-4 bg-white rounded-full">
+        <div className="hidden justify-between items-center gap-4 p-2 md:pr-4 bg-white rounded-full sm:flex sm:gap-2">
           <img
             src="https://api.dicebear.com/8.x/avataaars/svg?seed=Whiskers"
             alt="Profile Image"
