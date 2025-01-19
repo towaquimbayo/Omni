@@ -17,8 +17,8 @@ export default function Layout({
   }
 
   const isAuthPage = title === "Login" || title === "Signup";
-  const containerClassName = `max-w-[1800px] min-h-screen ${
-    isAuthPage ? "" : "mx-auto px-8"
+  const containerClassName = `min-h-[90vh] ${
+    isAuthPage ? "" : "max-w-[1800px] mx-auto px-8"
   }`;
 
   return (

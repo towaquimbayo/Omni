@@ -13,7 +13,7 @@ export default function Navbar() {
 
   return (
     <nav className="sticky bottom-6 max-w-[1800px] mx-auto px-4 md:px-8">
-      <div className="w-full bg-[#f8f8f8] shadow-sm rounded-full flex justify-between items-center p-2">
+      <div className="w-full bg-[#f8f8f8]/70 backdrop-blur-sm shadow-sm rounded-full flex justify-between items-center p-2">
         <img
           src="../assets/primary_logo_dark.svg"
           alt="Omni"

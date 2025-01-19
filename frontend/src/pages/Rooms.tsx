@@ -4,6 +4,7 @@ import {
   LayoutGrid,
   Leaf,
   Pause,
+  Play,
   Radio,
   Repeat,
   Rewind,
@@ -82,7 +83,8 @@ export default function Rooms() {
   const [devices, setDevices] = useState(mockDevices);
   const [thermostat, setThermostat] = useState(true);
   const [temperature, setTemperature] = useState(23);
-  // 10:52 PM format
+  const [musicPaused, setMusicPaused] = useState(false);
+  const [thermostatType, setThermostatType] = useState("Cold");
   const currentTime = new Date().toLocaleTimeString("en-US", {
     hour: "numeric",
     minute: "numeric",
@@ -146,7 +148,7 @@ export default function Rooms() {
 
   return (
     <Layout title="Rooms" isLandingPage>
-      <div className="w-full flex justify-items-center pt-8 min-h-[85vh]">
+      <div className="w-full flex justify-items-center pt-8 min-h-[80vh]">
         <div className="w-3/4 mx-auto pr-8">
           <div className="flex gap-12 align-center mb-6">
             {rooms.map((room) => (
@@ -378,13 +380,13 @@ export default function Rooms() {
         </div>
 
         <div className="w-1/4 mx-auto p-8 bg-thermostat-gradient h-full rounded-3xl flex flex-col">
-          <h1 className="text-4xl text-center font-light text-white mb-4">
+          <h1 className="text-3xl text-center font-light text-white mb-2">
             {currentTime.split(" ")[0]}{" "}
             <span className="text-gray-400">{currentTime.split(" ")[1]}</span>
           </h1>
           <hr className="border-[#e7e7e7] border-t-2 border-opacity-50 mb-4 w-16 mx-auto rounded-full" />
 
-          <div className="flex justify-between items-center my-4">
+          <div className="flex justify-between items-center">
             <p className="text-lg text-white">Thermostat</p>
             <div
               className={`w-12 h-7 rounded-full flex items-center p-1 cursor-pointer transition-all duration-300 ease-in-out ${
@@ -405,7 +407,7 @@ export default function Rooms() {
             <CircularSlider
               minValue={-20}
               maxValue={40}
-              size={350}
+              size={320}
               trackWidth={12}
               startAngle={40}
               endAngle={320}
@@ -444,30 +446,70 @@ export default function Rooms() {
             </div>
           </div>
 
-          <div className="flex gap-2 mt-4">
-            <div className="w-1/4 flex flex-col justify-center items-center gap-2 bg-slate-800 rounded-xl p-4 text-[#e9e9e9] text-center cursor-pointer hover:bg-[#b8beeb] hover:text-black transition-all duration-300 ease-in-out">
-              <SunDim size={36} />
+          <div className="flex gap-2">
+            <div
+              className={`w-1/4 flex flex-col justify-center items-center gap-2 rounded-xl p-4 text-center cursor-pointer transition-all duration-300 ease-in-out ${
+                thermostatType === "Hot"
+                  ? "bg-[#b8beeb] text-black hover:bg-[#8793da] hover:text-black"
+                  : "bg-slate-800 text-[#e9e9e9] hover:bg-[#b8beeb] hover:text-black"
+              }`}
+              onClick={() => {
+                setThermostatType("Hot");
+                setTemperature(35);
+              }}
+            >
+              <SunDim size={30} />
               <p className="text-sm">Hot</p>
             </div>
-            <div className="w-1/4 flex flex-col justify-center items-center gap-2 bg-slate-800 rounded-xl p-4 text-[#e9e9e9] text-center cursor-pointer hover:bg-[#b8beeb] hover:text-black transition-all duration-300 ease-in-out">
-              <Leaf size={36} />
+            <div
+              className={`w-1/4 flex flex-col justify-center items-center gap-2 rounded-xl p-4 text-center cursor-pointer transition-all duration-300 ease-in-out ${
+                thermostatType === "Eco"
+                  ? "bg-[#b8beeb] text-black hover:bg-[#8793da] hover:text-black"
+                  : "bg-slate-800 text-[#e9e9e9] hover:bg-[#b8beeb] hover:text-black"
+              }`}
+              onClick={() => {
+                setThermostatType("Eco");
+                setTemperature(20);
+              }}
+            >
+              <Leaf size={30} />
               <p className="text-sm">Eco</p>
             </div>
-            <div className="w-1/4 flex flex-col justify-center items-center gap-2 bg-slate-800 rounded-xl p-4 text-[#e9e9e9] text-center cursor-pointer hover:bg-[#b8beeb] hover:text-black transition-all duration-300 ease-in-out">
-              <Wind size={36} />
+            <div
+              className={`w-1/4 flex flex-col justify-center items-center gap-2 rounded-xl p-4 text-center cursor-pointer transition-all duration-300 ease-in-out ${
+                thermostatType === "Fan"
+                  ? "bg-[#b8beeb] text-black hover:bg-[#8793da] hover:text-black"
+                  : "bg-slate-800 text-[#e9e9e9] hover:bg-[#b8beeb] hover:text-black"
+              }`}
+              onClick={() => {
+                setThermostatType("Fan");
+                setTemperature(12);
+              }}
+            >
+              <Wind size={30} />
               <p className="text-sm">Fan</p>
             </div>
-            <div className="w-1/4 flex flex-col justify-center items-center gap-2 bg-[#b8beeb] rounded-xl p-4 text-black text-center cursor-pointer hover:bg-[#8793da] hover:text-black transition-all duration-300 ease-in-out">
-              <Snowflake size={36} />
+            <div
+              className={`w-1/4 flex flex-col justify-center items-center gap-2 rounded-xl p-4 text-center cursor-pointer transition-all duration-300 ease-in-out ${
+                thermostatType === "Cold"
+                  ? "bg-[#b8beeb] text-black hover:bg-[#8793da] hover:text-black"
+                  : "bg-slate-800 text-[#e9e9e9] hover:bg-[#b8beeb] hover:text-black"
+              }`}
+              onClick={() => {
+                setThermostatType("Cold");
+                setTemperature(-12);
+              }}
+            >
+              <Snowflake size={30} />
               <p className="text-sm">Cold</p>
             </div>
           </div>
 
-          <div className="bg-white w-full mt-8 p-4 rounded-xl text-center">
+          <div className="bg-white w-full mt-4 p-4 rounded-xl text-center">
             <p className="text-[#858585] mb-1">Mangat Toor</p>
             <h2 className="text-primary text-2xl font-medium">God's Plan</h2>
 
-            <div className="relative w-full mt-8 h-2 bg-[#b9b9b9] rounded-full">
+            <div className="relative w-full mt-4 h-2 bg-[#b9b9b9] rounded-full">
               <div
                 className="absolute top-0 left-0 h-full bg-primary rounded-full"
                 style={{ width: "25%" }}
@@ -481,19 +523,22 @@ export default function Rooms() {
 
             <div className="w-full flex justify-between items-center">
               <div className="bg-[#f0f0f0] p-4 rounded-full cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#dddddd]">
-                <Repeat size={20} />
+                <Repeat size={16} />
               </div>
               <div className="bg-[#f0f0f0] p-4 rounded-full cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#dddddd]">
-                <Rewind size={20} />
+                <Rewind size={16} />
               </div>
-              <div className="bg-[#e8f3ff] p-4 rounded-full cursor-pointer transition-all duration-300 ease-in-out hover:bg-primary hover:text-white">
-                <Pause size={40} />
+              <div
+                className="bg-[#e8f3ff] p-4 rounded-full cursor-pointer transition-all duration-300 ease-in-out hover:bg-primary hover:text-white"
+                onClick={() => setMusicPaused(!musicPaused)}
+              >
+                {musicPaused ? <Play size={32} /> : <Pause size={32} />}
               </div>
               <div className="bg-[#f0f0f0] p-4 rounded-full cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#dddddd]">
-                <FastForward size={20} />
+                <FastForward size={16} />
               </div>
               <div className="bg-[#f0f0f0] p-4 rounded-full cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#dddddd]">
-                <Radio size={20} />
+                <Radio size={16} />
               </div>
             </div>
           </div>
