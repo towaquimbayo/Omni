@@ -81,45 +81,45 @@ export default function Rooms() {
     );
   }
 
-  function DeviceCard({
-    device,
-    onToggle,
-  }: {
-    device: (typeof mockDevices)[0];
-    onToggle: () => void;
-  }) {
-    return (
-      <div
-        className="w-1/4 border-[#e7e7e7] border rounded-xl py-5 px-4 flex flex-col gap-1 transition duration-300 ease-in-out"
-        style={{ backgroundColor: device.isConnected ? "#e8f3ff" : "white" }}
-      >
-        <div className="flex items-center justify-between pb-12">
-          <div className="bg-white border border-[#585858] w-8 h-8 rounded-full flex items-center justify-center">
-            <LayoutGrid size={16} color="#585858" />
-          </div>
+  // function DeviceCard({
+  //   device,
+  //   onToggle,
+  // }: {
+  //   device: (typeof mockDevices)[0];
+  //   onToggle: () => void;
+  // }) {
+  //   return (
+  //     <div
+  //       className="w-1/4 border-[#e7e7e7] border rounded-xl py-5 px-4 flex flex-col gap-1 transition duration-300 ease-in-out"
+  //       style={{ backgroundColor: device.isConnected ? "#e8f3ff" : "white" }}
+  //     >
+  //       <div className="flex items-center justify-between pb-12">
+  //         <div className="bg-white border border-[#585858] w-8 h-8 rounded-full flex items-center justify-center">
+  //           <LayoutGrid size={16} color="#585858" />
+  //         </div>
 
-          <div
-            className={`w-10 h-6 rounded-full flex items-center p-1 cursor-pointer transition-all duration-300 ease-in-out ${
-              device.isConnected ? "bg-primary" : "bg-[#585858]"
-            }`}
-            onClick={onToggle}
-          >
-            <div
-              className="w-5 h-5 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
-              style={{
-                transform: device.isConnected
-                  ? "translateX(60%)"
-                  : "translateX(0)",
-              }}
-            ></div>
-          </div>
-        </div>
+  //         <div
+  //           className={`w-10 h-6 rounded-full flex items-center p-1 cursor-pointer transition-all duration-300 ease-in-out ${
+  //             device.isConnected ? "bg-primary" : "bg-[#585858]"
+  //           }`}
+  //           onClick={onToggle}
+  //         >
+  //           <div
+  //             className="w-5 h-5 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
+  //             style={{
+  //               transform: device.isConnected
+  //                 ? "translateX(60%)"
+  //                 : "translateX(0)",
+  //             }}
+  //           ></div>
+  //         </div>
+  //       </div>
 
-        <p className="text-[#858585] text-sm">{device.name}</p>
-        <h2 className="text-xl font-semibold">{device.type}</h2>
-      </div>
-    );
-  }
+  //       <p className="text-[#858585] text-sm">{device.name}</p>
+  //       <h2 className="text-xl font-semibold">{device.type}</h2>
+  //     </div>
+  //   );
+  // }
 
   return (
     <Layout title="Rooms" isLandingPage>
@@ -175,7 +175,160 @@ export default function Rooms() {
           </div>
 
           <div className="flex justify-center items-center gap-4">
-            {devices.slice(0, 4).map((device) => (
+            <div
+              className="w-1/4 border-[#e7e7e7] border rounded-xl py-5 px-4 flex flex-col gap-1 transition duration-300 ease-in-out"
+              style={{
+                backgroundColor: devices[0].isConnected ? "#e8f3ff" : "white",
+              }}
+            >
+              <div className="flex items-center justify-between pb-12">
+                <div className="bg-white border border-[#585858] w-8 h-8 rounded-full flex items-center justify-center">
+                  <LayoutGrid size={16} color="#585858" />
+                </div>
+
+                <div
+                  className={`w-10 h-6 rounded-full flex items-center p-1 cursor-pointer transition-all duration-300 ease-in-out ${
+                    devices[0].isConnected ? "bg-primary" : "bg-[#585858]"
+                  }`}
+                  onClick={() => {
+                    const updatedDevices = devices.map((d) =>
+                      d.id === devices[0].id
+                        ? { ...d, isConnected: !d.isConnected }
+                        : d
+                    );
+                    setDevices(updatedDevices);
+                  }}
+                >
+                  <div
+                    className="w-5 h-5 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
+                    style={{
+                      transform: devices[0].isConnected
+                        ? "translateX(60%)"
+                        : "translateX(0)",
+                    }}
+                  ></div>
+                </div>
+              </div>
+
+              <p className="text-[#858585] text-sm">{devices[0].name}</p>
+              <h2 className="text-xl font-semibold">{devices[0].type}</h2>
+            </div>
+            <div
+              className="w-1/4 border-[#e7e7e7] border rounded-xl py-5 px-4 flex flex-col gap-1 transition duration-300 ease-in-out"
+              style={{
+                backgroundColor: devices[1].isConnected ? "#e8f3ff" : "white",
+              }}
+            >
+              <div className="flex items-center justify-between pb-12">
+                <div className="bg-white border border-[#585858] w-8 h-8 rounded-full flex items-center justify-center">
+                  <LayoutGrid size={16} color="#585858" />
+                </div>
+
+                <div
+                  className={`w-10 h-6 rounded-full flex items-center p-1 cursor-pointer transition-all duration-300 ease-in-out ${
+                    devices[1].isConnected ? "bg-primary" : "bg-[#585858]"
+                  }`}
+                  onClick={() => {
+                    const updatedDevices = devices.map((d) =>
+                      d.id === devices[1].id
+                        ? { ...d, isConnected: !d.isConnected }
+                        : d
+                    );
+                    setDevices(updatedDevices);
+                  }}
+                >
+                  <div
+                    className="w-5 h-5 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
+                    style={{
+                      transform: devices[1].isConnected
+                        ? "translateX(60%)"
+                        : "translateX(0)",
+                    }}
+                  ></div>
+                </div>
+              </div>
+
+              <p className="text-[#858585] text-sm">{devices[1].name}</p>
+              <h2 className="text-xl font-semibold">{devices[1].type}</h2>
+            </div>
+            <div
+              className="w-1/4 border-[#e7e7e7] border rounded-xl py-5 px-4 flex flex-col gap-1 transition duration-300 ease-in-out"
+              style={{
+                backgroundColor: devices[2].isConnected ? "#e8f3ff" : "white",
+              }}
+            >
+              <div className="flex items-center justify-between pb-12">
+                <div className="bg-white border border-[#585858] w-8 h-8 rounded-full flex items-center justify-center">
+                  <LayoutGrid size={16} color="#585858" />
+                </div>
+
+                <div
+                  className={`w-10 h-6 rounded-full flex items-center p-1 cursor-pointer transition-all duration-300 ease-in-out ${
+                    devices[2].isConnected ? "bg-primary" : "bg-[#585858]"
+                  }`}
+                  onClick={() => {
+                    const updatedDevices = devices.map((d) =>
+                      d.id === devices[2].id
+                        ? { ...d, isConnected: !d.isConnected }
+                        : d
+                    );
+                    setDevices(updatedDevices);
+                  }}
+                >
+                  <div
+                    className="w-5 h-5 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
+                    style={{
+                      transform: devices[2].isConnected
+                        ? "translateX(60%)"
+                        : "translateX(0)",
+                    }}
+                  ></div>
+                </div>
+              </div>
+
+              <p className="text-[#858585] text-sm">{devices[2].name}</p>
+              <h2 className="text-xl font-semibold">{devices[2].type}</h2>
+            </div>
+            <div
+              className="w-1/4 border-[#e7e7e7] border rounded-xl py-5 px-4 flex flex-col gap-1 transition duration-300 ease-in-out"
+              style={{
+                backgroundColor: devices[3].isConnected ? "#e8f3ff" : "white",
+              }}
+            >
+              <div className="flex items-center justify-between pb-12">
+                <div className="bg-white border border-[#585858] w-8 h-8 rounded-full flex items-center justify-center">
+                  <LayoutGrid size={16} color="#585858" />
+                </div>
+
+                <div
+                  className={`w-10 h-6 rounded-full flex items-center p-1 cursor-pointer transition-all duration-300 ease-in-out ${
+                    devices[3].isConnected ? "bg-primary" : "bg-[#585858]"
+                  }`}
+                  onClick={() => {
+                    const updatedDevices = devices.map((d) =>
+                      d.id === devices[3].id
+                        ? { ...d, isConnected: !d.isConnected }
+                        : d
+                    );
+                    setDevices(updatedDevices);
+                  }}
+                >
+                  <div
+                    className="w-5 h-5 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
+                    style={{
+                      transform: devices[3].isConnected
+                        ? "translateX(60%)"
+                        : "translateX(0)",
+                    }}
+                  ></div>
+                </div>
+              </div>
+
+              <p className="text-[#858585] text-sm">{devices[3].name}</p>
+              <h2 className="text-xl font-semibold">{devices[3].type}</h2>
+            </div>
+            
+            {/* {devices.map((device) => (
               <DeviceCard
                 key={device.id}
                 device={device}
@@ -188,7 +341,7 @@ export default function Rooms() {
                   setDevices(updatedDevices);
                 }}
               />
-            ))}
+            ))} */}
           </div>
         </div>
         <div className="w-1/4 mx-auto">
