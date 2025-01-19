@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LayoutGrid } from "lucide-react";
 import Layout from "../components/Layout";
-import { AudioVisualizer, LiveAudioVisualizer } from "react-audio-visualize";
+import { LiveAudioVisualizer } from "react-audio-visualize";
 import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 
 export default function Rooms() {
@@ -67,7 +67,6 @@ export default function Rooms() {
   ];
   const [selectedRoom, setSelectedRoom] = useState(rooms[0]);
   const [devices, setDevices] = useState(mockDevices);
-  const [blob, setBlob] = useState<Blob>();
   const recorder = useAudioRecorder();
 
   function StatsCard({
@@ -162,10 +161,7 @@ export default function Rooms() {
                 Voice control your devices with Nia, your personal assistant.
               </p>
 
-              <AudioRecorder
-                onRecordingComplete={setBlob}
-                recorderControls={recorder}
-              />
+              <AudioRecorder recorderControls={recorder} />
 
               <div className="mt-8 flex justify-center items-stretch gap-4 h-[120px] w-full">
                 {recorder.mediaRecorder && (
