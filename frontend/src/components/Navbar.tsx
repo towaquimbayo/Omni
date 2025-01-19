@@ -12,15 +12,15 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky bottom-6 max-w-[1800px] mx-auto">
+    <nav className="sticky bottom-6 max-w-[1800px] mx-auto px-4 md:px-8">
       <div className="w-full bg-[#f8f8f8] shadow-sm rounded-full flex justify-between items-center p-2">
         <img
           src="../assets/primary_logo_dark.svg"
           alt="Omni"
-          className="h-6 pl-6 w-auto cursor-pointer"
+          className="h-4 md:h-6 pl-6 w-auto cursor-pointer"
           onClick={() => navigate("/")}
         />
-        <div className="flex gap-12">
+        <div className="flex gap-4 md:gap-12">
           <Link className={isPageActive("/")} to="/">
             Rooms
           </Link>
@@ -34,13 +34,13 @@ export default function Navbar() {
             Logout
           </Link>
         </div>
-        <div className="flex justify-between items-center gap-2 p-2 pr-4 bg-white rounded-full">
+        <div className="flex justify-between items-center gap-2 p-2 md:pr-4 bg-white rounded-full">
           <img
             src="https://api.dicebear.com/8.x/avataaars/svg?seed=Whiskers"
             alt="Profile Image"
             className="w-10 h-10 rounded-full bg-[#f8f8f8]"
           />
-          <div className="flex flex-col">
+          <div className="hidden md:flex flex-col">
             <span className="text-sm text-gray-500">@elmoworld</span>
             <span className="font-semibold">Elmo World</span>
           </div>
