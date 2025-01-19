@@ -73,9 +73,6 @@ const automations: Automation[] = [
   },
 ];
 
-console.log(import.meta.env.VITE_HOME_ASSISTANT_URL);
-console.log(import.meta.env.VITE_HOME_ASSISTANT_TOKEN);
-
 const HOME_ASSISTANT_URL = import.meta.env.VITE_HOME_ASSISTANT_URL;
 const HOME_ASSISTANT_TOKEN = import.meta.env.VITE_HOME_ASSISTANT_TOKEN;
 
