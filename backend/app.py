@@ -1,4 +1,6 @@
 # app.py
+import os
+
 from flask import Flask, request, jsonify
 from config import Config
 from voice.detector import WakeWordDetector
@@ -13,15 +15,16 @@ import json
 
 
 def send_to_conversation_api(command: str, language: str = "en"):
-    url = "http://<home_assistant_url>/api/conversation/process"
+    url = f'{config.HOME_ASSISTANT_URL}/api/conversation/process'
     headers = {
-        "Authorization": "Bearer <access_token>",  # Replace with your Home Assistant long-lived token
+        "Authorization": f'{config.HOME_ASSISTANT_ID}',
         "Content-Type": "application/json"
     }
 
     payload = {
         "text": command,
-        "language": language
+        "language": language,
+        "agent_id": "conversation.chatgpt"
     }
 
     try:
@@ -71,20 +74,20 @@ def transcribe_command():
     try:
         # Process and transcribe audio
         transcribed_text= transcriber.transcribe_bytes(audio_data)
-        # Process command
+        # # Process command
         conversation_response = send_to_conversation_api(transcribed_text[0])
+        #
+        # # Extract useful information from the conversation response
+        print(conversation_response)
+        speech_response = conversation_response.get("response", {}).get("speech", {}).get("plain", {}).get("speech", "")
+        conversation_id = conversation_response.get("conversation_id", "")
 
-        # Extract useful information from the conversation response
-        action = conversation_response.get("action", None)
-        device = conversation_response.get("device", None)
-        params = conversation_response.get("parameters", None)
 
         return jsonify({
-            "transcribed_text": transcribe_command,
+            "transcribed_text": transcribed_text,
             "command": {
-                "action": action,
-                "device": device,
-                "parameters": params
+                "speech_response": speech_response,
+                "conversation_id":conversation_id
             }
         })
     except Exception as e:

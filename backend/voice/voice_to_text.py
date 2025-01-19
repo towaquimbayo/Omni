@@ -2,6 +2,8 @@ import pvleopard
 from dataclasses import dataclass
 from typing import List, Tuple, Union, BinaryIO
 import io
+import numpy as np
+from pydub import AudioSegment
 import wave
 
 
@@ -38,13 +40,34 @@ class LeopardTranscriber:
                 - List of TranscriptWord objects with timing and confidence
         """
         try:
-            # If we got a file-like object, read it
-            if hasattr(audio_bytes, 'read'):
-                audio_bytes = audio_bytes.read()
+            # Convert audio to format Porcupine expects
+            audio = AudioSegment.from_file(io.BytesIO(audio_bytes))
+
+            # Convert to required format for Porcupine
+            audio = audio.set_channels(1)  # Mono
+            audio = audio.set_frame_rate(16000)  # 16kHz
+            audio = audio.set_sample_width(2)  # 16-bit
+            pcm_data = np.array(audio.get_array_of_samples())
+            # # Convert to PCM frames
+            # pcm_data = np.array(audio.get_array_of_samples())
+            #
+            # # Process frames in chunks of Porcupine's expected frame length
+            # frame_length = self.leopard.frame_length
+            # num_frames = len(pcm_data) // frame_length
+            #
+            # for i in range(num_frames):
+            #     start_idx = i * frame_length
+            #     end_idx = start_idx + frame_length
+            #     frame = pcm_data[start_idx:end_idx]
+            #
+            #     if len(frame) == frame_length:  # Ensure frame is complete
+            #         result = self.leopard.process(frame)
+            # # If we got a file-like object, read it
+            # if hasattr(audio_bytes, 'read'):
+            #     audio_bytes = audio_bytes.read()
 
             # Process the bytes directly with Leopard
-            transcript, words = self.leopard.process_bytes(audio_bytes)
-
+            transcript, words = self.leopard.process(pcm_data)
             # Convert words to TranscriptWord objects
             word_objects = [
                 TranscriptWord(
