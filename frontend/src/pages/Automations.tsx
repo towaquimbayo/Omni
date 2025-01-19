@@ -90,6 +90,8 @@ export default function Automations() {
     { id: "new", type: "" },
   ]);
   const [automationList, setAutomationList] = useState(automations);
+  const [newAutomationName, setNewAutomationName] = useState("");
+  const [newTrigger, setNewTrigger] = useState(TRIGGER_OPTIONS[0]);
 
   const toggleAutomation = (id: number) => {
     setEnabledAutomations((prev) => {
@@ -131,8 +133,8 @@ export default function Automations() {
 
     const newAutomation = {
       id: automationList.length + 1,
-      name: "New Automation",
-      trigger: { id: "1", type: "When bathroom light is turned on" },
+      name: newAutomationName,
+      trigger: { id: "1", type: newTrigger },
       actions: newActions,
       enabled: true,
     };
@@ -140,6 +142,8 @@ export default function Automations() {
     setAutomationList([newAutomation, ...automationList]);
     setExpandedAutomation(null);
     setNewActions([{ id: "new", type: "" }]);
+    setNewAutomationName("");
+    setNewTrigger(TRIGGER_OPTIONS[0]);
 
     const randomIntId = Math.floor(Math.random() * 100000000);
     const requestBody = {
@@ -154,15 +158,13 @@ export default function Automations() {
         },
       ],
       conditions: [],
-      actions: [
-        {
-          type: "turn_on",
-          device_id: "807a1f94ce3e1c71be582ab52cd6d99d",
-          entity_id: "0821671c0dbcd04e7ca33b2378c9ba47",
-          domain: "switch",
-        },
-      ],
-      alias: "test noufil automation api from app",
+      actions: newActions.map(() => ({
+        type: "turn_on",
+        device_id: "807a1f94ce3e1c71be582ab52cd6d99d",
+        entity_id: "0821671c0dbcd04e7ca33b2378c9ba47",
+        domain: "switch",
+      })),
+      alias: newAutomationName,
     };
 
     try {
@@ -270,6 +272,8 @@ export default function Automations() {
                   </label>
                   <input
                     type="text"
+                    value={newAutomationName}
+                    onChange={(e) => setNewAutomationName(e.target.value)}
                     className="mt-1 block w-full px-4 py-2.5
                       bg-white border border-gray-300 
                       rounded-xl shadow-sm
@@ -285,6 +289,8 @@ export default function Automations() {
                     Trigger
                   </label>
                   <select
+                    value={newTrigger}
+                    onChange={(e) => setNewTrigger(e.target.value)}
                     className="mt-1 block w-full px-4 py-2.5
                       bg-white border border-gray-300 
                       rounded-xl shadow-sm
