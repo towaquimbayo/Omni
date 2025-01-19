@@ -1,6 +1,7 @@
 import Layout from "../components/Layout";
 import { Plus, Zap, Play } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 // Temporary mock data
 const automations = [
@@ -56,12 +57,13 @@ export default function Automations() {
       {/* Header Section */}
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-semibold">Automations</h1>
-        <button
+        <Link
+          to="/create-automation"
           className="flex items-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90"
         >
           <Plus className="w-5 h-5 mr-2" />
           Create Automation
-        </button>
+        </Link>
       </div>
 
       {/* Automations Grid */}
@@ -96,7 +98,11 @@ export default function Automations() {
             </div>
 
             <div className="mt-4 flex space-x-2">
-              <button className="text-sm text-primary hover:text-primary/80">Edit</button>
+              <Link 
+                to={`/edit-automation/${automation.id}`}
+                className="text-sm text-primary hover:text-primary/80">
+                  Edit
+              </Link>
               <span className="text-gray-300">|</span>
               <button className="text-sm text-red-600 hover:text-red-700">Delete</button>
             </div>
