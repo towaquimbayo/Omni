@@ -15,9 +15,9 @@ import json
 
 
 def send_to_conversation_api(command: str, language: str = "en"):
-    url = "http://64.180.57.134:8123/api/conversation/process"
+    url = f'{config.HOME_ASSISTANT_URL}/api/conversation/process'
     headers = {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI5ZDBlMzdhZDUyMWU0OTZiYTAyZjY4NGJlYjU3OTdiMyIsImlhdCI6MTczNzI2OTE5OCwiZXhwIjoyMDUyNjI5MTk4fQ.HyPw8PJuib0icOVRcgYUKxsAEvkE5yhYvHfxMZdGCfc",  # Replace with your Home Assistant long-lived token
+        "Authorization": f'{config.HOME_ASSISTANT_ID}',
         "Content-Type": "application/json"
     }
 
@@ -79,16 +79,15 @@ def transcribe_command():
         #
         # # Extract useful information from the conversation response
         print(conversation_response)
-        action = conversation_response.get("action", None)
-        device = conversation_response.get("device", None)
-        params = conversation_response.get("parameters", None)
+        speech_response = conversation_response.get("response", {}).get("speech", {}).get("plain", {}).get("speech", "")
+        conversation_id = conversation_response.get("conversation_id", "")
+
 
         return jsonify({
             "transcribed_text": transcribed_text,
             "command": {
-                "action": action,
-                "device": device,
-                "parameters": params
+                "speech_response": speech_response,
+                "conversation_id":conversation_id
             }
         })
     except Exception as e:
