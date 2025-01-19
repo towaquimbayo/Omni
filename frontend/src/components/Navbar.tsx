@@ -21,7 +21,7 @@ export default function Navbar() {
           onClick={() => navigate("/")}
         />
         <div className="flex gap-12">
-          <Link className={isPageActive("/")} to="/" aria-current="page">
+          <Link className={isPageActive("/")} to="/">
             Rooms
           </Link>
           <Link className={isPageActive("/devices")} to="/devices">
@@ -33,10 +33,6 @@ export default function Navbar() {
           <Link className={isPageActive("/login")} to="/login">
             Logout
           </Link>
-          {/* @TODO: Fix logout */}
-          {/* <button className="text-gray-500" onClick={() => alert("Logout")}>
-            Logout
-          </button> */}
         </div>
         <div className="flex justify-between items-center gap-2 p-2 pr-4 bg-white rounded-full">
           <img

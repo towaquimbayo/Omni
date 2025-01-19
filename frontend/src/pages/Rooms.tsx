@@ -136,8 +136,8 @@ export default function Rooms() {
                 className={`${
                   room.id === selectedRoom.id
                     ? "text-2xl font-semibold"
-                    : "text-lg text-gray-500"
-                } flex items-center gap-2`}
+                    : "text-lg text-gray-500 hover:text-gray-900"
+                } flex items-center gap-2 transition-all duration-100 ease-in-out`}
               >
                 {room.id === selectedRoom.id && (
                   <div className="w-3 h-3 bg-[#c4dbf3] transform rotate-45 mx-auto"></div>
