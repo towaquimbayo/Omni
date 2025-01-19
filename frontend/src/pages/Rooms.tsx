@@ -260,7 +260,7 @@ export default function Rooms() {
 
                 <div
                   className={`w-10 h-6 rounded-full flex items-center p-1 cursor-pointer transition-all duration-300 ease-in-out ${
-                    devices[1].isConnected ? "bg-primary" : "bg-[#9b9b9b]"
+                    devices[1].isConnected ? "bg-primary" : "bg-[#b6b6b6]"
                   }`}
                   onClick={() => {
                     const updatedDevices = devices.map((d) =>

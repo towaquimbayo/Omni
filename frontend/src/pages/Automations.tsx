@@ -402,7 +402,7 @@ export default function Automations() {
                   className={`relative w-11 h-6 rounded-full transition-colors ${
                     enabledAutomations.has(automation.id)
                       ? "bg-primary"
-                      : "bg-gray-200"
+                      : "bg-[#b6b6b6]"
                   }`}
                 >
                   <span
