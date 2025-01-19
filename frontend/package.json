@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "react": "^18.3.1",
+    "react-audio-visualize": "^1.2.0",
+    "react-audio-voice-recorder": "^2.2.0",
+    "react-circular-slider-svg": "^0.3.0",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {

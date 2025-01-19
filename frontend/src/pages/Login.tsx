@@ -26,7 +26,7 @@ export default function Login() {
         <div className="w-1/2 relative flex flex-col">
           {/* Logo */}
           <div className="absolute top-8 left-8">
-            <img src="../assets/primary_logo.svg" alt="Omni" className="h-8 w-auto" />
+            <img src="../assets/primary_logo_light.svg" alt="Omni" className="h-8 w-auto" />
           </div>
 
           {/* Centered Content */}

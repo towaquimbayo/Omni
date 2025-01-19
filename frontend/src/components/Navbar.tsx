@@ -5,23 +5,23 @@ export default function Navbar() {
 
   const isPageActive = (path: string) => {
     if (window.location.pathname === path) {
-      return "text-[#3431c7] font-medium transition duration-300 ease-in-out underline underline-offset-8";
+      return "text-primary font-semibold transition duration-300 ease-in-out border-b-2 border-primary/30 pb-1";
     } else {
-      return "text-gray-500 hover:text-[#3431c7] transition duration-300 ease-in-out";
+      return "text-gray-500 hover:text-primary transition duration-300 ease-in-out";
     }
   };
 
   return (
-    <nav className="absolute bottom-6 left-16 right-16">
-      <div className="w-full bg-[#f8f8f8] shadow-sm rounded-full flex justify-between items-center p-6">
-        <h3
-          className="text-xl font-semibold cursor-pointer"
+    <nav className="sticky bottom-6 mx-8">
+      <div className="w-full bg-[#f8f8f8] shadow-sm rounded-full flex justify-between items-center p-2">
+        <img
+          src="../assets/primary_logo_dark.svg"
+          alt="Omni"
+          className="h-6 pl-6 w-auto cursor-pointer"
           onClick={() => navigate("/")}
-        >
-          Omni
-        </h3>
+        />
         <div className="flex gap-12">
-          <Link className={isPageActive("/")} to="/" aria-current="page">
+          <Link className={isPageActive("/")} to="/">
             Rooms
           </Link>
           <Link className={isPageActive("/devices")} to="/devices">
@@ -30,16 +30,15 @@ export default function Navbar() {
           <Link className={isPageActive("/automations")} to="/automations">
             Automations
           </Link>
-          {/* @TODO: Fix logout */}
-          <button className="text-gray-500" onClick={() => alert("Logout")}>
+          <Link className={isPageActive("/login")} to="/login">
             Logout
-          </button>
+          </Link>
         </div>
-        <div className="flex justify-between items-center gap-2 px-4 py-2 bg-white rounded-full">
+        <div className="flex justify-between items-center gap-2 p-2 pr-4 bg-white rounded-full">
           <img
-            src="../assets/profile.jpg"
+            src="https://api.dicebear.com/8.x/avataaars/svg?seed=Whiskers"
             alt="Profile Image"
-            className="w-10 h-10 rounded-full"
+            className="w-10 h-10 rounded-full bg-[#f8f8f8]"
           />
           <div className="flex flex-col">
             <span className="text-sm text-gray-500">@elmoworld</span>
