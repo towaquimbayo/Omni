@@ -47,9 +47,7 @@ const automations: Automation[] = [
     id: 1,
     name: "Morning Routine",
     trigger: { id: "1", type: "Every day at 7:00 AM" },
-    actions: [
-      { id: "1", type: "Turn on lights" },
-    ],
+    actions: [{ id: "1", type: "Turn on lights" }],
     enabled: true,
   },
   {
@@ -83,14 +81,18 @@ const HOME_ASSISTANT_TOKEN = import.meta.env.VITE_HOME_ASSISTANT_TOKEN;
 
 export default function Automations() {
   const [enabledAutomations, setEnabledAutomations] = useState(
-    new Set(automations.filter(a => a.enabled).map(a => a.id))
+    new Set(automations.filter((a) => a.enabled).map((a) => a.id))
   );
-  const [expandedAutomation, setExpandedAutomation] = useState<number | null>(null);
-  const [newActions, setNewActions] = useState<Action[]>([{ id: "new", type: "" }]);
+  const [expandedAutomation, setExpandedAutomation] = useState<number | null>(
+    null
+  );
+  const [newActions, setNewActions] = useState<Action[]>([
+    { id: "new", type: "" },
+  ]);
   const [automationList, setAutomationList] = useState(automations);
 
   const toggleAutomation = (id: number) => {
-    setEnabledAutomations(prev => {
+    setEnabledAutomations((prev) => {
       const next = new Set(prev);
       if (next.has(id)) {
         next.delete(id);
@@ -102,11 +104,11 @@ export default function Automations() {
   };
 
   const toggleExpand = (id: number | null) => {
-    setExpandedAutomation(prev => (prev === id ? null : id));
+    setExpandedAutomation((prev) => (prev === id ? null : id));
   };
 
   const handleActionChange = (index: number, value: string) => {
-    setNewActions(prev => {
+    setNewActions((prev) => {
       const updated = [...prev];
       updated[index].type = value;
       return updated;
@@ -114,11 +116,14 @@ export default function Automations() {
   };
 
   const addAction = () => {
-    setNewActions(prev => [...prev, { id: `new-${prev.length + 1}`, type: "" }]);
+    setNewActions((prev) => [
+      ...prev,
+      { id: `new-${prev.length + 1}`, type: "" },
+    ]);
   };
 
   const removeAction = (index: number) => {
-    setNewActions(prev => prev.filter((_, i) => i !== index));
+    setNewActions((prev) => prev.filter((_, i) => i !== index));
   };
 
   const handleCreateAutomation = async (e: React.FormEvent) => {
@@ -135,7 +140,7 @@ export default function Automations() {
     setAutomationList([newAutomation, ...automationList]);
     setExpandedAutomation(null);
     setNewActions([{ id: "new", type: "" }]);
-  
+
     const randomIntId = Math.floor(Math.random() * 100000000);
     const requestBody = {
       description: "",
@@ -159,29 +164,38 @@ export default function Automations() {
       ],
       alias: "test noufil automation api from app",
     };
-  
+
     try {
-      await fetch(`${HOME_ASSISTANT_URL}/api/config/automation/config/${randomIntId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${HOME_ASSISTANT_TOKEN}`,
-          "ngrok-skip-browser-warning": "true",
-        },
-        body: JSON.stringify(requestBody),
-      });
+      await fetch(
+        `${HOME_ASSISTANT_URL}/api/config/automation/config/${randomIntId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${HOME_ASSISTANT_TOKEN}`,
+            "ngrok-skip-browser-warning": "true",
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
     } catch (error) {
       console.error("Error creating automation:", error);
     }
   };
 
   const handleDeleteAutomation = (id: number) => {
-    setAutomationList(prev => prev.filter(automation => automation.id !== id));
+    setAutomationList((prev) =>
+      prev.filter((automation) => automation.id !== id)
+    );
   };
 
-  const handleActionEdit = (automationId: number, index: number, value: string) => {
-    setAutomationList(prev => {
-      const updated = prev.map(automation => {
+  const handleActionEdit = (
+    automationId: number,
+    index: number,
+    value: string
+  ) => {
+    setAutomationList((prev) => {
+      const updated = prev.map((automation) => {
         if (automation.id === automationId) {
           const updatedActions = [...automation.actions];
           updatedActions[index].type = value;
@@ -194,10 +208,16 @@ export default function Automations() {
   };
 
   const handleActionAdd = (automationId: number) => {
-    setAutomationList(prev => {
-      const updated = prev.map(automation => {
+    setAutomationList((prev) => {
+      const updated = prev.map((automation) => {
         if (automation.id === automationId) {
-          return { ...automation, actions: [...automation.actions, { id: `new-${automation.actions.length + 1}`, type: "" }] };
+          return {
+            ...automation,
+            actions: [
+              ...automation.actions,
+              { id: `new-${automation.actions.length + 1}`, type: "" },
+            ],
+          };
         }
         return automation;
       });
@@ -206,10 +226,13 @@ export default function Automations() {
   };
 
   const handleActionRemove = (automationId: number, index: number) => {
-    setAutomationList(prev => {
-      const updated = prev.map(automation => {
+    setAutomationList((prev) => {
+      const updated = prev.map((automation) => {
         if (automation.id === automationId) {
-          return { ...automation, actions: automation.actions.filter((_, i) => i !== index) };
+          return {
+            ...automation,
+            actions: automation.actions.filter((_, i) => i !== index),
+          };
         }
         return automation;
       });
@@ -220,15 +243,15 @@ export default function Automations() {
   return (
     <Layout title="Automations">
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center py-8 gap-4 md:gap-0">
+      <div className="flex flex-col min-[500px]:flex-row justify-between items-start md:items-center py-8 gap-4 md:gap-0">
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 bg-[#c4dbf3] transform rotate-45 mx-auto"></div>
-          <h1 className="text-3xl font-semibold">My Automations</h1>
+          <h1 className="text-xl font-semibold md:text-3xl">My Automations</h1>
         </div>
-        
+
         <button
           onClick={() => toggleExpand(-1)}
-          className="md:flex-1 flex items-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90"
+          className="flex items-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90"
         >
           <Plus className="w-5 h-5 mr-2" />
           Create Automation
@@ -242,20 +265,27 @@ export default function Automations() {
             <div className="p-6">
               <form onSubmit={handleCreateAutomation}>
                 <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700">Name</label>
-                  <input type="text" className="mt-1 block w-full px-4 py-2.5
+                  <label className="block text-sm font-medium text-gray-700">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    className="mt-1 block w-full px-4 py-2.5
                       bg-white border border-gray-300 
                       rounded-xl shadow-sm
                       text-gray-700
                       appearance-none
                       cursor-pointer
                       hover:border-primary/50
-                      focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" 
+                      focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                   />
                 </div>
                 <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700">Trigger</label>
-                  <select className="mt-1 block w-full px-4 py-2.5
+                  <label className="block text-sm font-medium text-gray-700">
+                    Trigger
+                  </label>
+                  <select
+                    className="mt-1 block w-full px-4 py-2.5
                       bg-white border border-gray-300 
                       rounded-xl shadow-sm
                       text-gray-700
@@ -264,18 +294,24 @@ export default function Automations() {
                       hover:border-primary/50
                       focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                   >
-                    {TRIGGER_OPTIONS.map(option => (
-                      <option key={option} value={option}>{option}</option>
+                    {TRIGGER_OPTIONS.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
                     ))}
                   </select>
                 </div>
                 <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700">Actions</label>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Actions
+                  </label>
                   {newActions.map((action, index) => (
                     <div key={action.id} className="flex items-center mb-2">
                       <select
                         value={action.type}
-                        onChange={(e) => handleActionChange(index, e.target.value)}
+                        onChange={(e) =>
+                          handleActionChange(index, e.target.value)
+                        }
                         className="mt-1 block w-full px-4 py-2.5
                           bg-white border border-gray-300 
                           rounded-xl shadow-sm
@@ -286,8 +322,10 @@ export default function Automations() {
                           focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                       >
                         <option value="">Select action</option>
-                        {ACTION_OPTIONS.map(option => (
-                          <option key={option} value={option}>{option}</option>
+                        {ACTION_OPTIONS.map((option) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
                         ))}
                       </select>
                       <button
@@ -308,10 +346,17 @@ export default function Automations() {
                   </button>
                 </div>
                 <div className="flex justify-end space-x-2">
-                  <button type="button" onClick={() => toggleExpand(null)} className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
+                  <button
+                    type="button"
+                    onClick={() => toggleExpand(null)}
+                    className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
+                  >
                     Cancel
                   </button>
-                  <button type="submit" className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90">
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90"
+                  >
                     Save
                   </button>
                 </div>
@@ -320,7 +365,10 @@ export default function Automations() {
           </div>
         )}
         {automationList.map((automation) => (
-          <div key={automation.id} className="border border-gray-200 rounded-3xl">
+          <div
+            key={automation.id}
+            className="border border-gray-200 rounded-3xl"
+          >
             <div className="p-6 flex justify-between items-start">
               <div>
                 <h3 className="text-lg font-medium">{automation.name}</h3>
@@ -333,11 +381,17 @@ export default function Automations() {
                   {automation.actions.length} Actions
                 </div>
                 <div className="flex space-x-2 pt-4">
-                  <button onClick={() => toggleExpand(automation.id)} className="text-sm text-primary hover:text-primary/80">
+                  <button
+                    onClick={() => toggleExpand(automation.id)}
+                    className="text-sm text-primary hover:text-primary/80"
+                  >
                     Edit
                   </button>
                   <span className="text-gray-300">|</span>
-                  <button onClick={() => handleDeleteAutomation(automation.id)} className="text-sm text-red-600 hover:text-red-700">
+                  <button
+                    onClick={() => handleDeleteAutomation(automation.id)}
+                    className="text-sm text-red-600 hover:text-red-700"
+                  >
                     Delete
                   </button>
                 </div>
@@ -346,12 +400,16 @@ export default function Automations() {
                 <button
                   onClick={() => toggleAutomation(automation.id)}
                   className={`relative w-11 h-6 rounded-full transition-colors ${
-                    enabledAutomations.has(automation.id) ? 'bg-primary' : 'bg-gray-200'
+                    enabledAutomations.has(automation.id)
+                      ? "bg-primary"
+                      : "bg-gray-200"
                   }`}
                 >
                   <span
                     className={`absolute left-1 top-1 w-4 h-4 rounded-full bg-white transition-transform duration-200 ${
-                      enabledAutomations.has(automation.id) ? 'translate-x-5' : 'translate-x-0'
+                      enabledAutomations.has(automation.id)
+                        ? "translate-x-5"
+                        : "translate-x-0"
                     }`}
                   />
                 </button>
@@ -361,8 +419,11 @@ export default function Automations() {
               <div className="p-6 border-t border-gray-200 bg-secondary/60 rounded-b-3xl">
                 <form>
                   <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700">Trigger</label>
-                    <select className="mt-1 block w-full px-4 py-2.5
+                    <label className="block text-sm font-medium text-gray-700">
+                      Trigger
+                    </label>
+                    <select
+                      className="mt-1 block w-full px-4 py-2.5
                         bg-white border border-gray-300 
                         rounded-xl shadow-sm
                         text-gray-700
@@ -371,18 +432,28 @@ export default function Automations() {
                         hover:border-primary/50
                         focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                     >
-                      {TRIGGER_OPTIONS.map(option => (
-                        <option key={option} value={option}>{option}</option>
+                      {TRIGGER_OPTIONS.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
                       ))}
                     </select>
                   </div>
                   <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700">Actions</label>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Actions
+                    </label>
                     {automation.actions.map((action, index) => (
                       <div key={action.id} className="flex items-center mb-2">
                         <select
                           value={action.type}
-                          onChange={(e) => handleActionEdit(automation.id, index, e.target.value)}
+                          onChange={(e) =>
+                            handleActionEdit(
+                              automation.id,
+                              index,
+                              e.target.value
+                            )
+                          }
                           className="mt-1 block w-full px-4 py-2.5
                             bg-white border border-gray-300 
                             rounded-xl shadow-sm
@@ -393,13 +464,17 @@ export default function Automations() {
                             focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                         >
                           <option value="">Select action</option>
-                          {ACTION_OPTIONS.map(option => (
-                            <option key={option} value={option}>{option}</option>
+                          {ACTION_OPTIONS.map((option) => (
+                            <option key={option} value={option}>
+                              {option}
+                            </option>
                           ))}
                         </select>
                         <button
                           type="button"
-                          onClick={() => handleActionRemove(automation.id, index)}
+                          onClick={() =>
+                            handleActionRemove(automation.id, index)
+                          }
                           className="ml-2 text-red-600 hover:text-red-700"
                         >
                           <Trash className="w-5 h-5" />
@@ -416,10 +491,17 @@ export default function Automations() {
                     </button>
                   </div>
                   <div className="flex justify-end space-x-2">
-                    <button type="button" onClick={() => toggleExpand(null)} className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
+                    <button
+                      type="button"
+                      onClick={() => toggleExpand(null)}
+                      className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
+                    >
                       Cancel
                     </button>
-                    <button type="submit" className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90">
+                    <button
+                      type="submit"
+                      className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90"
+                    >
                       Save
                     </button>
                   </div>
