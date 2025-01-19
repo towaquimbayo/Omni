@@ -171,11 +171,21 @@ export default function Rooms() {
 
           <div className="flex justify-center items-stretch gap-4 mb-4 flex-wrap md:flex-nowrap">
             <div className="w-full lg:w-1/2">
-              <img
+              <video
+                controls
+                preload="auto"
+                className="w-full h-full object-cover rounded-3xl"
+              >
+                <source
+                  src="https://broadly-enough-husky.ngrok-free.app/hls/stream.m3u8"
+                  type="application/x-mpegURL"
+                />
+              </video>
+              {/* <img
                 src="./assets/live-cam.png"
                 alt="Live Camera footage"
                 className="w-full h-full object-cover rounded-3xl"
-              />
+              /> */}
             </div>
             <div className="w-full border border-[#e7e7e7] rounded-3xl p-4 lg:w-1/2">
               <h2 className="text-2xl font-semibold mb-2">Voice Assistant</h2>
