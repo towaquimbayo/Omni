@@ -16,7 +16,8 @@ export default function Layout({
     document.title = isLandingPage ? "Omni" : `${title} | Omni`;
   }
 
-  const showNav = !(title === "Login" || title === "Signup");
+  const isAuthPage = title === "Login" || title === "Signup";
+  const containerClassName = `min-h-screen ${isAuthPage ? '' : 'max-w-7xl mx-auto px-16'}`;
 
   return (
     <>
@@ -24,8 +25,8 @@ export default function Layout({
         <meta charSet="utf-8" />
         <title>{isLandingPage ? "Omni" : `${title} | Omni`}</title>
       </Helmet>
-      <div className="min-h-screen max-w-7xl mx-auto px-16">{children}</div>
-      {showNav && <Navbar />}
+      <div className={containerClassName}>{children}</div>
+      {!isAuthPage && <Navbar />}
     </>
   );
 }
