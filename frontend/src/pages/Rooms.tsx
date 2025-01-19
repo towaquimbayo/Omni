@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { LayoutGrid } from "lucide-react";
 import Layout from "../components/Layout";
+import { AudioVisualizer, LiveAudioVisualizer } from "react-audio-visualize";
+import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 
 export default function Rooms() {
   const rooms = [
@@ -65,6 +67,8 @@ export default function Rooms() {
   ];
   const [selectedRoom, setSelectedRoom] = useState(rooms[0]);
   const [devices, setDevices] = useState(mockDevices);
+  const [blob, setBlob] = useState<Blob>();
+  const recorder = useAudioRecorder();
 
   function StatsCard({
     title,
@@ -149,16 +153,28 @@ export default function Rooms() {
               <img
                 src="./assets/live-camera-placeholder.jpg"
                 alt="Live Camera footage"
-                className="w-full object-cover rounded-xl"
+                className="w-full h-full object-cover rounded-xl"
               />
             </div>
             <div className="w-1/2 border border-[#e7e7e7] rounded-xl p-4">
-              <h2 className="text-2xl font-semibold">Voice Assistant</h2>
-              <p className="text-[#858585] text-sm">
+              <h2 className="text-2xl font-semibold mb-2">Voice Assistant</h2>
+              <p className="text-[#858585] text-sm mb-4">
                 Voice control your devices with Nia, your personal assistant.
               </p>
 
-              {/* Soundwave */}
+              <AudioRecorder
+                onRecordingComplete={setBlob}
+                recorderControls={recorder}
+              />
+
+              <div className="mt-8 flex justify-center items-stretch gap-4 h-[120px] w-full">
+                {recorder.mediaRecorder && (
+                  <LiveAudioVisualizer
+                    mediaRecorder={recorder.mediaRecorder}
+                    width={200}
+                  />
+                )}
+              </div>
             </div>
           </div>
 
@@ -327,7 +343,7 @@ export default function Rooms() {
               <p className="text-[#858585] text-sm">{devices[3].name}</p>
               <h2 className="text-xl font-semibold">{devices[3].type}</h2>
             </div>
-            
+
             {/* {devices.map((device) => (
               <DeviceCard
                 key={device.id}
