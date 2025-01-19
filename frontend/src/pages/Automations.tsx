@@ -90,7 +90,7 @@ export default function Automations() {
       {/* Header Section */}
       <div className="flex justify-between items-center py-8">
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 bg-primary/30 transform rotate-45 mx-auto"></div>
+          <div className="w-2 h-2 bg-[#c4dbf3] transform rotate-45 mx-auto"></div>
           <h1 className="text-3xl font-semibold">My Automations</h1>
         </div>
         
