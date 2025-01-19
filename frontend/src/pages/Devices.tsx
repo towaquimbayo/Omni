@@ -137,7 +137,7 @@ export default function Devices() {
       <div className="flex justify-between items-center py-8">
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 bg-[#c4dbf3] transform rotate-45 mx-auto"></div>
-          <h1 className="text-3xl font-semibold">My Devices</h1>
+          <h1 className="text-xl font-semibold md:text-3xl">My Devices</h1>
         </div>
 
         <button className="flex items-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90">
@@ -170,12 +170,12 @@ export default function Devices() {
           .map((row, rowIndex) => (
             <div
               key={rowIndex}
-              className="flex justify-start items-center gap-4"
+              className="grid grid-cols-1 md:grid-cols-2 min-[1400px]:grid-cols-4 gap-4"
             >
               {row.map((device) => (
                 <div
                   key={device.id}
-                  className="w-1/4 border-[#e7e7e7] border rounded-xl py-5 px-5 flex flex-col gap-1 transition duration-300 ease-in-out"
+                  className="w-full border-[#e7e7e7] border rounded-xl py-5 px-5 flex flex-col gap-1 transition duration-300 ease-in-out"
                 >
                   <div className="flex justify-between items-center gap-2">
                     <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[#243b5a] mb-2">
