@@ -77,7 +77,7 @@ export default function Rooms() {
     value: number | string;
   }) {
     return (
-      <div className="w-1/3 border-[#e7e7e7] border rounded-xl py-5 px-4 flex flex-col gap-1">
+      <div className="w-1/3 border-[#e7e7e7] border rounded-3xl py-5 px-4 flex flex-col gap-1">
         <h2 className="text-[#858585]">{title}</h2>
         <p className="text-4xl font-semibold">{value}</p>
       </div>
@@ -93,7 +93,7 @@ export default function Rooms() {
   // }) {
   //   return (
   //     <div
-  //       className="w-1/4 border-[#e7e7e7] border rounded-xl py-5 px-4 flex flex-col gap-1 transition duration-300 ease-in-out"
+  //       className="w-1/4 border-[#e7e7e7] border rounded-3xl py-5 px-4 flex flex-col gap-1 transition duration-300 ease-in-out"
   //       style={{ backgroundColor: device.isConnected ? "#e8f3ff" : "white" }}
   //     >
   //       <div className="flex items-center justify-between pb-12">
@@ -126,21 +126,21 @@ export default function Rooms() {
 
   return (
     <Layout title="Rooms" isLandingPage>
-      <div className="w-full flex justify-items-center pt-12">
+      <div className="w-full flex justify-items-center pt-8">
         <div className="w-3/4 mx-auto pr-8">
-          <div className="flex gap-12 align-center mb-8">
+          <div className="flex gap-12 align-center mb-6">
             {rooms.map((room) => (
               <button
                 key={room.id}
                 onClick={() => setSelectedRoom(room)}
                 className={`${
                   room.id === selectedRoom.id
-                    ? "text-2xl font-semibold"
+                    ? "text-3xl font-semibold"
                     : "text-lg text-gray-500 hover:text-gray-900"
                 } flex items-center gap-2 transition-all duration-100 ease-in-out`}
               >
                 {room.id === selectedRoom.id && (
-                  <div className="w-3 h-3 bg-[#c4dbf3] transform rotate-45 mx-auto"></div>
+                  <div className="w-2 h-2 bg-primary/30 transform rotate-45 mx-auto"></div>
                 )}
                 {room.name}
               </button>
@@ -152,10 +152,10 @@ export default function Rooms() {
               <img
                 src="./assets/live-camera-placeholder.jpg"
                 alt="Live Camera footage"
-                className="w-full h-full object-cover rounded-xl"
+                className="w-full h-full object-cover rounded-3xl"
               />
             </div>
-            <div className="w-1/2 border border-[#e7e7e7] rounded-xl p-4">
+            <div className="w-1/2 border border-[#e7e7e7] rounded-3xl p-4">
               <h2 className="text-2xl font-semibold mb-2">Voice Assistant</h2>
               <p className="text-[#858585] text-sm mb-4">
                 Voice control your devices with Nia, your personal assistant.
@@ -358,7 +358,7 @@ export default function Rooms() {
         </div>
         <div className="w-1/4 mx-auto">
           {/* Placeholder */}
-          <div className="wi-full bg-[#0f1a4e] h-[80vh] rounded-xl"></div>
+          <div className="wi-full bg-[#0f1a4e] h-[80vh] rounded-3xl"></div>
         </div>
       </div>
     </Layout>
