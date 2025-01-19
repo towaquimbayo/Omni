@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-import Hls from "hls.js";
+import { useState } from "react";
 import {
   FastForward,
   LayoutGrid,
@@ -91,7 +90,6 @@ export default function Rooms() {
     minute: "numeric",
     hour12: true,
   });
-  const videoRef = useRef<null | HTMLVideoElement>(null);
 
   function StatsCard({
     title,
@@ -107,29 +105,6 @@ export default function Rooms() {
       </div>
     );
   }
-
-  useEffect(() => {
-    const hls = new Hls({
-      debug: true,
-    });
-
-    if (Hls.isSupported() && videoRef.current) {
-      hls.loadSource(
-        "https://broadly-enough-husky.ngrok-free.app/hls/stream.m3u8"
-      );
-
-      hls.attachMedia(videoRef.current);
-      hls.on(Hls.Events.ERROR, (err) => {
-        console.log(err);
-      });
-    } else {
-      console.log("load");
-    }
-    return () => {
-      // cleanup (when component destroyed or when useEffect runs twice on StrictMode)
-      hls.destroy();
-    };
-  }, []);
 
   // function DeviceCard({
   //   device,
@@ -196,11 +171,10 @@ export default function Rooms() {
 
           <div className="flex justify-center items-stretch gap-4 mb-4 flex-wrap md:flex-nowrap">
             <div className="w-full lg:w-1/2">
-              <video
-                ref={videoRef}
-                controls
-                autoPlay
-                style={{ width: "250px", borderRadius: "10px" }}
+              <img
+                src="./assets/live-cam.png"
+                alt="Live Camera footage"
+                className="w-full h-full object-cover rounded-3xl"
               />
             </div>
             <div className="w-full border border-[#e7e7e7] rounded-3xl p-4 lg:w-1/2">
