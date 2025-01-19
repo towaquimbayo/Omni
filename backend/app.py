@@ -1,4 +1,6 @@
 # app.py
+import os
+
 from flask import Flask, request, jsonify
 from config import Config
 from voice.detector import WakeWordDetector
@@ -13,15 +15,16 @@ import json
 
 
 def send_to_conversation_api(command: str, language: str = "en"):
-    url = "http://<home_assistant_url>/api/conversation/process"
+    url = "http://64.180.57.134:8123/api/conversation/process"
     headers = {
-        "Authorization": "Bearer <access_token>",  # Replace with your Home Assistant long-lived token
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI5ZDBlMzdhZDUyMWU0OTZiYTAyZjY4NGJlYjU3OTdiMyIsImlhdCI6MTczNzI2OTE5OCwiZXhwIjoyMDUyNjI5MTk4fQ.HyPw8PJuib0icOVRcgYUKxsAEvkE5yhYvHfxMZdGCfc",  # Replace with your Home Assistant long-lived token
         "Content-Type": "application/json"
     }
 
     payload = {
         "text": command,
-        "language": language
+        "language": language,
+        "agent_id": "conversation.chatgpt"
     }
 
     try:
@@ -71,16 +74,17 @@ def transcribe_command():
     try:
         # Process and transcribe audio
         transcribed_text= transcriber.transcribe_bytes(audio_data)
-        # Process command
+        # # Process command
         conversation_response = send_to_conversation_api(transcribed_text[0])
-
-        # Extract useful information from the conversation response
+        #
+        # # Extract useful information from the conversation response
+        print(conversation_response)
         action = conversation_response.get("action", None)
         device = conversation_response.get("device", None)
         params = conversation_response.get("parameters", None)
 
         return jsonify({
-            "transcribed_text": transcribe_command,
+            "transcribed_text": transcribed_text,
             "command": {
                 "action": action,
                 "device": device,
