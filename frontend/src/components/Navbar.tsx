@@ -16,16 +16,12 @@ export default function Navbar() {
       <div className="w-full bg-[#f8f8f8] shadow-sm rounded-full flex justify-between items-center p-6">
         <h3
           className="text-xl font-semibold cursor-pointer"
-          onClick={() => navigate("/rooms")}
+          onClick={() => navigate("/")}
         >
           Omni
         </h3>
         <div className="flex gap-12">
-          <Link
-            className={isPageActive("/rooms")}
-            to="/rooms"
-            aria-current="page"
-          >
+          <Link className={isPageActive("/")} to="/" aria-current="page">
             Rooms
           </Link>
           <Link className={isPageActive("/devices")} to="/devices">

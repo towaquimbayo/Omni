@@ -2,7 +2,7 @@ import { useState } from "react";
 import { LayoutGrid } from "lucide-react";
 import Layout from "../components/Layout";
 
-export default function Dashboard() {
+export default function Rooms() {
   const rooms = [
     {
       id: 0,
@@ -123,7 +123,7 @@ export default function Dashboard() {
   }
 
   return (
-    <Layout title="Dashboard" isLandingPage>
+    <Layout title="Rooms" isLandingPage>
       <div className="w-full flex justify-items-center pt-12">
         <div className="w-3/4 mx-auto pr-8">
           <div className="flex gap-12 align-center mb-8">
