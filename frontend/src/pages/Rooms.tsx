@@ -405,8 +405,8 @@ export default function Rooms() {
 
           <div className="flex flex-col items-center justify-center w-full">
             <CircularSlider
-              minValue={-20}
-              maxValue={40}
+              minValue={5}
+              maxValue={35}
               size={320}
               trackWidth={12}
               startAngle={40}
@@ -429,7 +429,7 @@ export default function Rooms() {
                 <button
                   className="w-12 h-12 text-2xl rounded-full bg-[#20233d] border-2 border-[#a0a0a0] text-white flex items-center justify-center hover:bg-[#6a76b9] hover:border-[#6a76b9] transition-all duration-300 ease-in-out"
                   onClick={() =>
-                    setTemperature((prev) => Math.max(prev - 1, -20))
+                    setTemperature((prev) => Math.max(prev - 1, 5))
                   }
                 >
                   -
@@ -437,7 +437,7 @@ export default function Rooms() {
                 <button
                   className="w-12 h-12 text-2xl rounded-full bg-[#20233d] border-2 border-[#a0a0a0] text-white flex items-center justify-center hover:bg-[#6a76b9] hover:border-[#6a76b9] transition-all duration-300 ease-in-out"
                   onClick={() =>
-                    setTemperature((prev) => Math.min(prev + 1, 40))
+                    setTemperature((prev) => Math.min(prev + 1, 35))
                   }
                 >
                   +
@@ -455,7 +455,7 @@ export default function Rooms() {
               }`}
               onClick={() => {
                 setThermostatType("Hot");
-                setTemperature(35);
+                setTemperature(32);
               }}
             >
               <SunDim size={30} />
@@ -497,7 +497,7 @@ export default function Rooms() {
               }`}
               onClick={() => {
                 setThermostatType("Cold");
-                setTemperature(-12);
+                setTemperature(7);
               }}
             >
               <Snowflake size={30} />
