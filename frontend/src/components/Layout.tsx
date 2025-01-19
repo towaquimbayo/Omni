@@ -18,7 +18,7 @@ export default function Layout({
 
   const isAuthPage = title === "Login" || title === "Signup";
   const containerClassName = `min-h-screen ${
-    isAuthPage ? "" : "mx-auto px-16"
+    isAuthPage ? "" : "mx-auto px-8"
   }`;
 
   return (

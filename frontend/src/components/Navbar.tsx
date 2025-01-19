@@ -5,14 +5,14 @@ export default function Navbar() {
 
   const isPageActive = (path: string) => {
     if (window.location.pathname === path) {
-      return "text-primary font-medium transition duration-300 ease-in-out border-b-2 border-primary/30 pb-1";
+      return "text-primary font-semibold transition duration-300 ease-in-out border-b-2 border-primary/30 pb-1";
     } else {
       return "text-gray-500 hover:text-primary transition duration-300 ease-in-out";
     }
   };
 
   return (
-    <nav className="absolute bottom-6 left-16 right-16">
+    <nav className="absolute bottom-6 left-8 right-8">
       <div className="w-full bg-[#f8f8f8] shadow-sm rounded-full flex justify-between items-center p-2">
         <img
           src="../assets/primary_logo_dark.svg"

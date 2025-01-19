@@ -18,6 +18,20 @@ const automations = [
     actions: 2,
     enabled: false,
   },
+  {
+    id: 3,
+    name: "Feedback Request",
+    trigger: "After 1 week of purchase",
+    actions: 1,
+    enabled: true,
+  },
+  {
+    id: 4,
+    name: "Abandoned Cart Reminder",
+    trigger: "After 1 hour of abandonment",
+    actions: 2,
+    enabled: true,
+  },
 ];
 
 export default function Automations() {
