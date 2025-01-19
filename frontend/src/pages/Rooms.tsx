@@ -222,7 +222,7 @@ export default function Rooms() {
 
                 <div
                   className={`w-10 h-6 rounded-full flex items-center p-1 cursor-pointer transition-all duration-300 ease-in-out ${
-                    devices[0].isConnected ? "bg-primary" : "bg-[#585858]"
+                    devices[0].isConnected ? "bg-primary" : "bg-[#9b9b9b]"
                   }`}
                   onClick={() => {
                     const updatedDevices = devices.map((d) =>
@@ -260,7 +260,7 @@ export default function Rooms() {
 
                 <div
                   className={`w-10 h-6 rounded-full flex items-center p-1 cursor-pointer transition-all duration-300 ease-in-out ${
-                    devices[1].isConnected ? "bg-primary" : "bg-[#585858]"
+                    devices[1].isConnected ? "bg-primary" : "bg-[#9b9b9b]"
                   }`}
                   onClick={() => {
                     const updatedDevices = devices.map((d) =>
@@ -298,7 +298,7 @@ export default function Rooms() {
 
                 <div
                   className={`w-10 h-6 rounded-full flex items-center p-1 cursor-pointer transition-all duration-300 ease-in-out ${
-                    devices[2].isConnected ? "bg-primary" : "bg-[#585858]"
+                    devices[2].isConnected ? "bg-primary" : "bg-[#9b9b9b]"
                   }`}
                   onClick={() => {
                     const updatedDevices = devices.map((d) =>
@@ -336,7 +336,7 @@ export default function Rooms() {
 
                 <div
                   className={`w-10 h-6 rounded-full flex items-center p-1 cursor-pointer transition-all duration-300 ease-in-out ${
-                    devices[3].isConnected ? "bg-primary" : "bg-[#585858]"
+                    devices[3].isConnected ? "bg-primary" : "bg-[#9b9b9b]"
                   }`}
                   onClick={() => {
                     const updatedDevices = devices.map((d) =>
