@@ -106,7 +106,7 @@ export default function Automations() {
       {/* Automations List */}
       <div className="space-y-4">
         {expandedAutomation === -1 && (
-          <div className="border border-gray-200 rounded-lg shadow-sm">
+          <div className="border border-gray-200 rounded-3xl">
             <div className="p-6">
               <form onSubmit={handleCreateAutomation}>
                 <div className="mb-4">
@@ -227,7 +227,7 @@ export default function Automations() {
               </div>
             </div>
             {expandedAutomation === automation.id && (
-              <div className="p-6 border-t border-gray-200">
+              <div className="p-6 border-t border-gray-200 bg-secondary/60 rounded-b-3xl">
                 <form>
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700">Trigger</label>
