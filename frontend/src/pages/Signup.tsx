@@ -26,12 +26,12 @@ export default function Signup() {
         <div className="w-1/2 relative flex flex-col">
           {/* Logo */}
           <div className="absolute top-8 left-8">
-            <h1 className="text-3xl font-bold text-white">omni</h1>
+            <img src="../assets/primary_logo.svg" alt="Omni" className="h-8 w-auto" />
           </div>
 
           {/* Centered Content */}
           <div className="flex-1 flex flex-col justify-center px-8">
-            <h2 className="text-4xl font-bold text-white mb-4">
+            <h2 className="text-5xl font-bold text-white mb-6">
               Intelligent Home Automation That Anticipates Your Needs
             </h2>
             <p className="text-xl text-white/80">
@@ -41,9 +41,9 @@ export default function Signup() {
 
           {/* Customer Review */}
           <div className="px-8 pb-8">
-            <div className="flex flex-col p-4 bg-white/10 rounded-3xl">
-              <p className="text-white/90 text-md italic mb-2">
-                "Omni has saved me countless hours. Now I can finally focus on what truly matters - watching cat videos."
+            <div className="flex flex-col p-4 bg-white/20 rounded-3xl">
+              <p className="text-white text-md italic mb-2">
+                "After trying multiple smart home apps, omni is in a league of its own. Setup took minutes, and now my entire home runs like clockwork."
               </p>
               <div className="flex items-center space-x-4">
                 <img
@@ -52,8 +52,8 @@ export default function Signup() {
                   className="w-12 h-12 rounded-xl bg-white/10"
                 />
                 <div>
-                  <p className="text-white font-medium">John Developer</p>
-                  <p className="text-white/60 text-sm">Professional Coffee Consumer</p>
+                  <p className="text-white font-medium">Michael K.</p>
+                  <p className="text-white/60 text-sm">Busy Parent</p>
                 </div>
               </div>
             </div>
