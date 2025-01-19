@@ -232,10 +232,10 @@ export default function Rooms() {
                   }}
                 >
                   <div
-                    className="w-5 h-5 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
+                    className="w-4 h-4 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
                     style={{
                       transform: devices[0].isConnected
-                        ? "translateX(60%)"
+                        ? "translateX(100%)"
                         : "translateX(0)",
                     }}
                   ></div>
@@ -270,10 +270,10 @@ export default function Rooms() {
                   }}
                 >
                   <div
-                    className="w-5 h-5 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
+                    className="w-4 h-4 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
                     style={{
                       transform: devices[1].isConnected
-                        ? "translateX(60%)"
+                        ? "translateX(100%)"
                         : "translateX(0)",
                     }}
                   ></div>
@@ -308,10 +308,10 @@ export default function Rooms() {
                   }}
                 >
                   <div
-                    className="w-5 h-5 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
+                    className="w-4 h-4 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
                     style={{
                       transform: devices[2].isConnected
-                        ? "translateX(60%)"
+                        ? "translateX(100%)"
                         : "translateX(0)",
                     }}
                   ></div>
@@ -346,10 +346,10 @@ export default function Rooms() {
                   }}
                 >
                   <div
-                    className="w-5 h-5 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
+                    className="w-4 h-4 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
                     style={{
                       transform: devices[3].isConnected
-                        ? "translateX(60%)"
+                        ? "translateX(100%)"
                         : "translateX(0)",
                     }}
                   ></div>
@@ -395,7 +395,7 @@ export default function Rooms() {
               <div
                 className="w-5 h-5 bg-white rounded-full transform transition-transform duration-300 ease-in-out"
                 style={{
-                  transform: thermostat ? "translateX(95%)" : "translateX(0)",
+                  transform: thermostat ? "translateX(100%)" : "translateX(0)",
                 }}
               ></div>
             </div>
