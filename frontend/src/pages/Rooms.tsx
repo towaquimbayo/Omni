@@ -99,7 +99,7 @@ export default function Rooms() {
     value: number | string;
   }) {
     return (
-      <div className="w-1/3 border-[#e7e7e7] border rounded-3xl py-5 px-4 flex flex-col gap-1">
+      <div className="w-full border-[#e7e7e7] border rounded-3xl py-5 px-4 flex flex-col gap-1 text-center sm:w-1/3 sm:text-left">
         <h2 className="text-[#858585]">{title}</h2>
         <p className="text-4xl font-semibold">{value}</p>
       </div>
@@ -148,17 +148,17 @@ export default function Rooms() {
 
   return (
     <Layout title="Rooms" isLandingPage>
-      <div className="w-full flex justify-items-center pt-8 min-h-[80vh]">
-        <div className="w-3/4 mx-auto pr-8">
-          <div className="flex gap-12 align-center mb-6">
+      <div className="w-full flex justify-items-center pt-8 min-h-[80vh] flex-wrap lg:flex-nowrap">
+        <div className="w-full mx-auto pr-0 mb-8 min-[1400px]:w-3/4 xl:w-2/3 lg:pr-8 md:1/2 lg:mb-0">
+          <div className="flex gap-4 align-center mb-6 md:gap-12">
             {rooms.map((room) => (
               <button
                 key={room.id}
                 onClick={() => setSelectedRoom(room)}
                 className={`${
                   room.id === selectedRoom.id
-                    ? "text-3xl font-semibold"
-                    : "text-lg text-gray-500 hover:text-gray-900"
+                    ? "text-xl font-semibold md:text-3xl"
+                    : "text-sm text-gray-500 hover:text-gray-900 md:text-lg"
                 } flex items-center gap-2 transition-all duration-100 ease-in-out`}
               >
                 {room.id === selectedRoom.id && (
@@ -169,15 +169,15 @@ export default function Rooms() {
             ))}
           </div>
 
-          <div className="flex justify-center items-stretch gap-4 mb-4">
-            <div className="w-1/2">
+          <div className="flex justify-center items-stretch gap-4 mb-4 flex-wrap md:flex-nowrap">
+            <div className="w-full lg:w-1/2">
               <img
                 src="./assets/live-camera-placeholder.jpg"
                 alt="Live Camera footage"
                 className="w-full h-full object-cover rounded-3xl"
               />
             </div>
-            <div className="w-1/2 border border-[#e7e7e7] rounded-3xl p-4">
+            <div className="w-full border border-[#e7e7e7] rounded-3xl p-4 lg:w-1/2">
               <h2 className="text-2xl font-semibold mb-2">Voice Assistant</h2>
               <p className="text-[#858585] text-sm mb-4">
                 Voice control your devices with Nia, your personal assistant.
@@ -196,7 +196,7 @@ export default function Rooms() {
             </div>
           </div>
 
-          <div className="flex justify-center items-center gap-4 mb-4">
+          <div className="flex justify-center items-center gap-4 mb-4 flex-wrap sm:flex-nowrap">
             <StatsCard
               title="Current Consumption"
               value={`${selectedRoom.currentConsumption}kWh`}
@@ -208,9 +208,9 @@ export default function Rooms() {
             />
           </div>
 
-          <div className="flex justify-center items-center gap-4">
+          <div className="flex justify-between items-center gap-4 flex-wrap md:flex-nowrap">
             <div
-              className="w-1/4 border-[#e7e7e7] border rounded-xl py-5 px-4 flex flex-col gap-1 transition duration-300 ease-in-out"
+              className="w-full border-[#e7e7e7] border rounded-xl py-5 px-4 flex flex-col gap-1 transition duration-300 ease-in-out md:w-1/4 sm:w-[48%]"
               style={{
                 backgroundColor: devices[0].isConnected ? "#e8f3ff" : "white",
               }}
@@ -248,7 +248,7 @@ export default function Rooms() {
               <h2 className="text-xl font-semibold">{devices[0].type}</h2>
             </div>
             <div
-              className="w-1/4 border-[#e7e7e7] border rounded-xl py-5 px-4 flex flex-col gap-1 transition duration-300 ease-in-out"
+              className="w-full border-[#e7e7e7] border rounded-xl py-5 px-4 flex flex-col gap-1 transition duration-300 ease-in-out md:w-1/4 sm:w-[48%]"
               style={{
                 backgroundColor: devices[1].isConnected ? "#e8f3ff" : "white",
               }}
@@ -286,7 +286,7 @@ export default function Rooms() {
               <h2 className="text-xl font-semibold">{devices[1].type}</h2>
             </div>
             <div
-              className="w-1/4 border-[#e7e7e7] border rounded-xl py-5 px-4 flex flex-col gap-1 transition duration-300 ease-in-out"
+              className="w-full border-[#e7e7e7] border rounded-xl py-5 px-4 flex flex-col gap-1 transition duration-300 ease-in-out md:w-1/4 sm:w-[48%]"
               style={{
                 backgroundColor: devices[2].isConnected ? "#e8f3ff" : "white",
               }}
@@ -324,7 +324,7 @@ export default function Rooms() {
               <h2 className="text-xl font-semibold">{devices[2].type}</h2>
             </div>
             <div
-              className="w-1/4 border-[#e7e7e7] border rounded-xl py-5 px-4 flex flex-col gap-1 transition duration-300 ease-in-out"
+              className="w-full border-[#e7e7e7] border rounded-xl py-5 px-4 flex flex-col gap-1 transition duration-300 ease-in-out md:w-1/4 sm:w-[48%]"
               style={{
                 backgroundColor: devices[3].isConnected ? "#e8f3ff" : "white",
               }}
@@ -379,7 +379,7 @@ export default function Rooms() {
           </div>
         </div>
 
-        <div className="w-1/4 mx-auto p-8 bg-thermostat-gradient h-full rounded-3xl flex flex-col">
+        <div className="w-full mx-auto p-8 bg-thermostat-gradient h-full rounded-3xl flex flex-col mb-16 min-[1400px]:w-1/4 xl:w-1/3 md:w-1/2 lg:mb-0">
           <h1 className="text-3xl text-center font-light text-white mb-2">
             {currentTime.split(" ")[0]}{" "}
             <span className="text-gray-400">{currentTime.split(" ")[1]}</span>
