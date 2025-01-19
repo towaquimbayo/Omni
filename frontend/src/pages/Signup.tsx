@@ -1,6 +1,15 @@
 import Layout from "../components/Layout";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Signup() {
+  const navigate = useNavigate();
+
+  const handleSignup = async (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+
+    navigate("/login");
+  };
+
   return (
     <Layout title="Signup">
       <div 
@@ -14,8 +23,41 @@ export default function Signup() {
         }}
       >
         {/* Left Half - Blue Background */}
-        <div className="w-1/2">
-          {/* Optional: Add decorative content here */}
+        <div className="w-1/2 relative flex flex-col">
+          {/* Logo */}
+          <div className="absolute top-8 left-8">
+            <img src="../assets/primary_logo.svg" alt="Omni" className="h-8 w-auto" />
+          </div>
+
+          {/* Centered Content */}
+          <div className="flex-1 flex flex-col justify-center px-8">
+            <h2 className="text-5xl font-bold text-white mb-6">
+              Intelligent Home Automation That Anticipates Your Needs
+            </h2>
+            <p className="text-xl text-white/80">
+              Experience the perfect harmony of comfort and technology, where every room responds to your desires.
+            </p>
+          </div>
+
+          {/* Customer Review */}
+          <div className="px-8 pb-8">
+            <div className="flex flex-col p-4 bg-white/20 rounded-3xl">
+              <p className="text-white text-md italic mb-2">
+                "After trying multiple smart home apps, omni is in a league of its own. Setup took minutes, and now my entire home runs like clockwork."
+              </p>
+              <div className="flex items-center space-x-4">
+                <img
+                  src="https://api.dicebear.com/8.x/avataaars/svg?seed=Whiskers"
+                  alt="Customer avatar"
+                  className="w-12 h-12 rounded-xl bg-white/10"
+                />
+                <div>
+                  <p className="text-white font-medium">Michael K.</p>
+                  <p className="text-white/60 text-sm">Busy Parent</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Right Half - Signup Form */}
@@ -26,7 +68,7 @@ export default function Signup() {
               <p className="mt-2 text-center text-gray-600">Sign up for a new account</p>
             </div>
             
-            <form className="mt-8 space-y-6">
+            <form className="mt-8 space-y-6" onSubmit={handleSignup}>
               <div className="rounded-md space-y-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700">
@@ -80,9 +122,9 @@ export default function Signup() {
                 </button>
                 <p className="mt-4 text-center text-sm text-gray-600">
                   Already have an account?{' '}
-                  <a href="/login" className="font-semibold text-primary hover:text-primary/80">
+                  <Link to="/login" className="font-semibold text-primary hover:text-primary/80">
                     Log in
-                  </a>
+                  </Link>
                 </p>
               </div>
             </form>
