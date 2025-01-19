@@ -12,7 +12,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="absolute bottom-6 left-8 right-8">
+    <nav className="sticky bottom-6 mx-8">
       <div className="w-full bg-[#f8f8f8] shadow-sm rounded-full flex justify-between items-center p-2">
         <img
           src="../assets/primary_logo_dark.svg"
