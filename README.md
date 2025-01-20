@@ -50,7 +50,7 @@ _Check out the devpost submission [_here_](https://devpost.com/software/omni-pt4
 * React Helmet `v6.1.0`
 * Hls.js `v1.5.19`
 * TailwindCSS `v3.4.17`
-* TypeScript v`5.6.2`
+* TypeScript `v5.6.2`
 * Vite `v6.0.5`
 * Python
 * Flask `v3.0.3`
