@@ -2,7 +2,7 @@
 
 # Omni
 
-<!-- ![Omni Thumbnail](screenshots/omni-thumbnail.jpg) -->
+![Omni Thumbnail](screenshots/omni-thumbnail.jpg)
 An innovative smart home application developed during nwHacks2025 in just 24 hours. It unifies major smart home standards and leverages Wi-Fi CSI (Channel State Information) for presence detection and gesture recognition, eliminating the need for intrusive cameras. With Omni, users can seamlessly automate tasks, control devices, and monitor their home’s environment through an intuitive web application, all while prioritizing privacy and convenience.
 
 > [!IMPORTANT]
